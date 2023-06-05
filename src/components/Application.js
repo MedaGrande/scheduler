@@ -17,7 +17,50 @@ export default function Application(props) {
   });
 
   let dailyAppointments = [];
-  // let interviewersArray = [];
+  
+  function bookInterview(id, interview) {
+    console.log(id, interview);
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...interview }
+    };
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
+    return Axios
+      .put(`/api/appointments/${id}`, { interview })
+      .then(() => {
+        setState({
+          ...state,
+          appointments
+        });
+      }); 
+  }
+
+  function cancelInterview(id) {
+    const appointment = {
+      ...state.appointments[id],
+      interview: null
+    };
+    console.log("appointment: ", appointment);
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
+    
+    console.log("appointments: ", appointments);
+    
+    return Axios
+      .delete(`/api/appointments/${id}`, { interview: null })
+      .then(() => {
+        setState({
+          ...state,
+          appointments
+        });
+      }) 
+    .catch ((err) => console.log('error: ', err));
+  }
 
 
   useEffect(() => {
@@ -38,6 +81,30 @@ export default function Application(props) {
   dailyAppointments = getAppointmentsForDay(state, state.day);
   
   const interviewersArray = getInterviewersForDay(state, state.day);
+
+
+  // const dailyAppointments = getAppointmentsForDay(state,
+  //   state.day
+  // );
+  // const interviewers = getInterviewersForDay(state,
+  //   state.day
+  // );
+  // const appointmentList =
+  //   dailyAppointments.map
+  //     (appointment => {
+  //       const { id, interview } = appointment;
+  //       const interviewObj = getInterview(state, interview);
+  //       return (
+  //         <Appointment
+  //           key={id}
+  //           {...appointment}
+  //           interview={interviewObj}
+  //           interviewers={interviewers}
+  //           bookInterview={bookInterview}
+  //           // cancelInterview={cancelInterview}
+  //         />
+  //       );
+  //     }); 
 
   return (
     <main className="layout">
@@ -69,9 +136,13 @@ export default function Application(props) {
               key={appointment.id}
               interview={interview}
               interviewers={interviewersArray}
+              {...appointment}
+              bookInterview={bookInterview}
+              cancelInterview={cancelInterview}
             />
           );
         })}
+        {/* {appointmentList}  */}
         <Appointment key="last" time="5pm" />
       </section>
     </main>
