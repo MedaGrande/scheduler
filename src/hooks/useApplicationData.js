@@ -77,7 +77,7 @@ export function useApplicationData(props) {
     const days = state.days.map((day) => {
       if (day[id] === id) {
         return {
-          ...day, spots: day.spots - 1
+          ...day, spots: day.spots + 1
         }
       } else {
         return day
