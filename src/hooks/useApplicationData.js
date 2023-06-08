@@ -10,7 +10,7 @@ export function useApplicationData(props) {
     day: "Monday",
     days: [],
     appointments: {},
-    interviewers: {}
+    interviewers: {}, 
   });
 
   useEffect(() => {
@@ -18,7 +18,7 @@ export function useApplicationData(props) {
       Axios.get("/api/days"),
       Axios.get("/api/appointments"),
       Axios.get("api/interviewers")
-    ]).then((all) => {
+    ]).then((all) => { 
       setState(prev => ({
         ...prev,
         days: all[0].data,
@@ -39,12 +39,26 @@ export function useApplicationData(props) {
       ...state.appointments,
       [id]: appointment
     };
+    
+    const days = state.days.map((day) => {
+      if (day[id] === id) {
+        return {
+          ...day, spots: day.spots - 1
+        }
+      } else {
+        return day
+      }
+    }
+
+    )
+  
     return Axios
       .put(`/api/appointments/${id}`, { interview })
       .then(() => {
         setState({
           ...state,
-          appointments
+          appointments, 
+          days
         });
       });
   }
@@ -60,15 +74,25 @@ export function useApplicationData(props) {
       ...state.appointments,
       [id]: appointment
     };
+    const days = state.days.map((day) => {
+      if (day[id] === id) {
+        return {
+          ...day, spots: day.spots - 1
+        }
+      } else {
+        return day
+      }
+    }
 
-    console.log("appointments: ", appointments);
+    )
 
     return Axios
       .delete(`/api/appointments/${id}`, { interview: null })
       .then(() => {
         setState({
           ...state,
-          appointments
+          appointments,
+          days
         });
       })
   }
