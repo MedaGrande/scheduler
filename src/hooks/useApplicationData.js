@@ -30,7 +30,6 @@ export function useApplicationData(props) {
 
 
   function bookInterview(id, interview) {
-    console.log(id, interview);
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview }
@@ -69,7 +68,7 @@ export function useApplicationData(props) {
       ...state.appointments[id],
       interview: null
     };
-    console.log("appointment: ", appointment);
+    
     const appointments = {
       ...state.appointments,
       [id]: appointment
