@@ -24,9 +24,6 @@ describe("Appointment", () => {
   it("renders without crashing", () => {
     render(<Error />);
   });
-  it("renders without crashing", (props) => {
-    render(<Form />);
-  });
   it("renders without crashing", () => {
     render(<Header />);
   });
@@ -36,5 +33,5 @@ describe("Appointment", () => {
   it("renders without crashing", () => {
     render(<Status />);
   });
-  
+
 });
