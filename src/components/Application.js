@@ -17,7 +17,6 @@ export default function Application(props) {
   
   let dailyAppointments = getAppointmentsForDay(state, state.day);
   const interviewersArray = getInterviewersForDay(state, state.day);
-console.log("message");
 
   return (
     <main className="layout">
