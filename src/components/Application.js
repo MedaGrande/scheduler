@@ -14,12 +14,10 @@ export default function Application(props) {
     cancelInterview
   } = useApplicationData();
 
-
-  let dailyAppointments = [];
   
-  dailyAppointments = getAppointmentsForDay(state, state.day);
+  let dailyAppointments = getAppointmentsForDay(state, state.day);
   const interviewersArray = getInterviewersForDay(state, state.day);
-
+console.log("message");
 
   return (
     <main className="layout">

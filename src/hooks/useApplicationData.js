@@ -17,7 +17,7 @@ export function useApplicationData(props) {
     Promise.all([
       Axios.get("/api/days"),
       Axios.get("/api/appointments"),
-      Axios.get("api/interviewers")
+      Axios.get("/api/interviewers")
     ]).then((all) => { 
       setState(prev => ({
         ...prev,
@@ -26,7 +26,7 @@ export function useApplicationData(props) {
         interviewers: all[2].data
       }));
     }).catch((err) => console.log('error: ', err));
-  })
+  }, [])
 
 
   function bookInterview(id, interview) {
