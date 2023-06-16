@@ -38,9 +38,9 @@ export function useApplicationData(props) {
       ...state.appointments,
       [id]: appointment
     };
-    
+    console.log("state.days: ", state.days);
     const days = state.days.map((day) => {
-      if (day[id] === id) {
+      if (day.appointments.includes(id)) {
         return {
           ...day, spots: day.spots - 1
         }
@@ -74,7 +74,7 @@ export function useApplicationData(props) {
       [id]: appointment
     };
     const days = state.days.map((day) => {
-      if (day[id] === id) {
+      if (day.appointments.includes(id)) {
         return {
           ...day, spots: day.spots + 1
         }
