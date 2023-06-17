@@ -28,7 +28,20 @@ export function useApplicationData(props) {
     }).catch((err) => console.log('error: ', err));
   }, [])
 
-
+//  appointments: {
+//     "1": { id: 1, time: "12pm", interview: null },
+//     "2": {
+//       id: 2,
+//       time: "1pm",
+//       interview: { student: "Archie Cohen", interviewer: 2 }
+//     },
+//     "3": {
+//       id: 3,
+//       time: "2pm",
+//       interview: { student: "Leopold Silvers", interviewer: 4 }
+//     },
+//     "4": { id: 4, time: "3pm", interview: null }
+//   },
   function bookInterview(id, interview) {
     const appointment = {
       ...state.appointments[id],
@@ -39,11 +52,18 @@ export function useApplicationData(props) {
       [id]: appointment
     };
     
+    console.log("state: ", state);
     
     const days = state.days.map((day) => {
       if (day.appointments.includes(id)) {
+        let counter = 0;
+        day.appointments.forEach(appointmentId => {
+          if (appointments[appointmentId].interview === null) {
+            counter++
+          }
+        });
         return {
-          ...day, spots: day.spots - 1
+          ...day, spots: counter
         }
       } else {
         return day
@@ -52,6 +72,8 @@ export function useApplicationData(props) {
 
     )
   
+
+
     return Axios
       .put(`/api/appointments/${id}`, { interview })
       .then(() => {
