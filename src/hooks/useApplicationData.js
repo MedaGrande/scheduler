@@ -52,7 +52,7 @@ export function useApplicationData(props) {
       [id]: appointment
     };
     
-    console.log("state: ", state);
+    // console.log("state: ", state);
     
     const days = state.days.map((day) => {
       if (day.appointments.includes(id)) {
