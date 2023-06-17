@@ -38,7 +38,8 @@ export function useApplicationData(props) {
       ...state.appointments,
       [id]: appointment
     };
-    console.log("state.days: ", state.days);
+    
+    
     const days = state.days.map((day) => {
       if (day.appointments.includes(id)) {
         return {
