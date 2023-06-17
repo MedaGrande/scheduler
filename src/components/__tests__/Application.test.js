@@ -1,5 +1,5 @@
 import React from "react";
-
+import axios from "axios";
 import { render, cleanup, waitForElement, fireEvent, getByAltText, getByPlaceholderText, queryByText, queryByAltText, getByDisplayValue } from "@testing-library/react";
 import { getByText, getAllByTestId } from "@testing-library/react";
 import Application from "components/Application";
@@ -121,11 +121,18 @@ it("loads data, cancels an interview and increases the spots remaining for Monda
     
   expect(getByText(day, "1 spot remaining")).toBeInTheDocument();
   
+    // debug();
   
-    debug();
-  
-
-  
+  });
+  it("shows the save error when failing to save an appointment", () => {
+    
+    axios.put.mockRejectedValueOnce();
+    
+});
+  it("shows the delete error when failing to delete an existing appointment", () => {
+    
+    axios.put.mockRejectedValueOnce();
+    
 });
   
 })
