@@ -43,12 +43,13 @@ export default function Application(props) {
       <section className="schedule">
         {Object.values(dailyAppointments).map((appointment) => {
           const interview = getInterview(state, appointment.interview);
+          console.log("interview: ", interview);
           return (
             <Appointment
               key={appointment.id}
+              {...appointment}
               interview={interview}
               interviewers={interviewersArray}
-              {...appointment}
               bookInterview={bookInterview}
               cancelInterview={cancelInterview}
             />

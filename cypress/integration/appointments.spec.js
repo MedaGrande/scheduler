@@ -18,7 +18,7 @@ describe("Appointments", () => {
   cy.contains("Save").click();
 
   cy.contains(".appointment__card--show", "Lydia Miller-Jones");
-  // cy.contains(".appointment__card--show", "Sylvia Palmer");
+  cy.contains(".appointment__card--show", "Sylvia Palmer");
  });
   
   it("should edit an interview", () => {
@@ -32,7 +32,7 @@ describe("Appointments", () => {
   cy.contains("Save").click();
 
   cy.contains(".appointment__card--show", "Lydia Miller-Jones");
-  // cy.contains(".appointment__card--show", "Tori Malcolm");
+  cy.contains(".appointment__card--show", "Tori Malcolm");
   });
   
   it("should cancel an interview", () => {
