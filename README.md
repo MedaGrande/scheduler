@@ -44,3 +44,10 @@ npm run storybook
 - cypress
 
 ## Screenshots
+
+![Basic functionality](https://github.com/MedaGrande/scheduler/blob/master/docs/Scheduler%20basic%20functionality.gif)
+![Days & appointments](https://github.com/MedaGrande/scheduler/blob/master/docs/Days%20and%20appointments.png)
+![Days & remaining spots](https://github.com/MedaGrande/scheduler/blob/master/docs/Days%20and%20spots%20remaining.png)
+![Empty appointment](https://github.com/MedaGrande/scheduler/blob/master/docs/Empty%20form.png)
+![Filled form](https://github.com/MedaGrande/scheduler/blob/master/docs/Filled%20form.png)
+![Booked appointment](https://github.com/MedaGrande/scheduler/blob/master/docs/Booked%20appointment.png)
