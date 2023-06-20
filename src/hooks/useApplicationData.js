@@ -11,7 +11,7 @@ export function useApplicationData(props) {
     day: "Monday",
     days: [],
     appointments: {},
-    interviewers: {}, 
+    interviewers: {},
   });
 
   //fetch data & update state
@@ -20,7 +20,7 @@ export function useApplicationData(props) {
       Axios.get("/api/days"),
       Axios.get("/api/appointments"),
       Axios.get("/api/interviewers")
-    ]).then((all) => { 
+    ]).then((all) => {
       setState(prev => ({
         ...prev,
         days: all[0].data,
@@ -41,7 +41,7 @@ export function useApplicationData(props) {
       ...state.appointments,
       [id]: appointment
     };
-    
+
     //update spots remaining
     const days = state.days.map((day) => {
       if (day.appointments.includes(id)) {
@@ -60,19 +60,19 @@ export function useApplicationData(props) {
     }
 
     )
-  
+
     //update remote state
     return Axios
       .put(`/api/appointments/${id}`, { interview })
       .then(() => {
         setState({
           ...state,
-          appointments, 
+          appointments,
           days
         });
       });
   }
-  
+
   // a function to remove an interview & update state
   function cancelInterview(id) {
     //set interview to null
@@ -80,7 +80,7 @@ export function useApplicationData(props) {
       ...state.appointments[id],
       interview: null
     };
-    
+
     const appointments = {
       ...state.appointments,
       [id]: appointment
@@ -111,13 +111,12 @@ export function useApplicationData(props) {
       })
   }
   return {
-    state, 
+    state,
     setDay,
-    bookInterview, 
+    bookInterview,
     cancelInterview
   }
 }
 
-  
 
-  
+

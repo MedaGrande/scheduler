@@ -22,26 +22,26 @@ export default function Form(props) {
 
   //check for an approriate entry into form
   function validate() {
-  if (student === "") {
-    setError("Student name cannot be blank");
-    return;
+    if (student === "") {
+      setError("Student name cannot be blank");
+      return;
+    }
+
+    if (interviewer === null) {
+      setError("Please select an interviewer");
+      return;
+    }
+
+    setError("");
+    props.onSave(student, interviewer);
   }
-    
-  if (interviewer === null) {
-    setError("Please select an interviewer");
-    return;
-  }  
-  
-  setError("");
-  props.onSave(student, interviewer);
-}
 
 
   return (
     <main className="appointment__card appointment__card--create">
       <section className="appointment__card-left">
         <form autoComplete="off" onSubmit={event => event.preventDefault()}>
-          <input 
+          <input
             className="appointment__create-input text--semi-bold"
             name="name"
             type="text"

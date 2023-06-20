@@ -3,12 +3,12 @@ import { useState } from "react";
 //handles transitions between modes & updates state
 export default function useVisualMode(initial) {
   const [history, setHistory] = useState([initial]);
-  
+
   function transition(next, replace = false) {
     if (replace === true) {
       setHistory((prev) => [...prev.slice(0, prev.length - 1), next])
     } else {
-      setHistory((prev)=> [...prev, next]);
+      setHistory((prev) => [...prev, next]);
     }
   }
 
@@ -23,7 +23,7 @@ export default function useVisualMode(initial) {
   return (
     {
       mode: history[history.length - 1],
-      transition, 
+      transition,
       back
     }
   )
