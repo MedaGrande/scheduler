@@ -1,5 +1,7 @@
 import React from "react";
 
+//displays booked appointments with student name, interviewer name & time,
+//shows edit & delete buttons
 export default function Show(props) {
   return (
     <main className="appointment__card appointment__card--show">

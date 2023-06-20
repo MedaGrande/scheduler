@@ -8,6 +8,7 @@ export default function Form(props) {
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
   const [error, setError] = useState("");
 
+  //cancels booking before saving
   function reset() {
     setStudent("")
     setInterviewer(null)
@@ -19,6 +20,7 @@ export default function Form(props) {
     props.onCancel()
   }
 
+  //check for an approriate entry into form
   function validate() {
   if (student === "") {
     setError("Student name cannot be blank");

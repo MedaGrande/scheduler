@@ -1,3 +1,4 @@
+//conditional spot remaining message
 export function formatSpots(spots) {
   return spots === 0
     ? "no spots remaining"

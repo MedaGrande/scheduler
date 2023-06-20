@@ -1,13 +1,14 @@
 import React from "react";
 import classNames from "classnames";
 import "components/DayListItem.scss";
-import { formatSpots } from "./formatSpots";
+import { formatSpots } from "../helpers/formatSpots";
 
 
 export default function DayListItem(props) {
   const { name, spots, setDay } = props;
   const spotsMessage = formatSpots(spots);
 
+  //conditional css 
   const dayClass = classNames({
     "day-list__item": true,
     "day-list__item--selected": props.selected,

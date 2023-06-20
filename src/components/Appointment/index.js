@@ -24,6 +24,7 @@ export default function Appointment(props) {
     props.interview ? SHOW : EMPTY
   );
 
+  //save appointment & transition to an appropriate component
   function save(name, interviewer) {
     const interview = {
       student: name,
@@ -36,6 +37,7 @@ export default function Appointment(props) {
     
   }
   
+  //delete an appointment & transition to an appropriate component
   function del() {
     transition(DELETING, true)
     props.cancelInterview(props.id)
@@ -43,12 +45,15 @@ export default function Appointment(props) {
       .catch((error) => transition(ERROR_DELETE, true));
   }
 
- 
+  //displays component based on mode
   return (
     <article className="appointment" data-testid="appointment">
       <Header time={props.time} />
+      
       {mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
-      {mode === SAVING && <Status message={"SAVING"} onSave={()=> transition(SAVING)} />}
+      
+      {mode === SAVING && <Status message={"SAVING"} onSave={() => transition(SAVING)} />}
+      
       {mode === SHOW && (
         <Show
           id={props.id}
@@ -66,14 +71,19 @@ export default function Appointment(props) {
         onCancel={() => back()}
         onSave={save}
         />}
+      
       {mode === CONFIRM && <Confirm
           message="Are you sure you would like to delete?"
           onCancel={back}
           onConfirm={del}
         />}
+      
       {mode === DELETING && <Status message={"DELETING"} />}
+      
       {mode === ERROR_SAVE && <Error onClose={back} message={"Could not perform function"} />}
+      
       {mode === ERROR_DELETE && <Error onClose={back} message={"Could not perform function"} />}
+      
       {mode === CREATE && (
         <Form
           interviewers={props.interviewers}

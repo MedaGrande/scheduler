@@ -1,3 +1,4 @@
+//custom hook containing state & associated functions
 import { useState, useEffect } from "react";
 import Axios from "axios";
 import "components/Application.scss";
@@ -13,6 +14,7 @@ export function useApplicationData(props) {
     interviewers: {}, 
   });
 
+  //fetch data & update state
   useEffect(() => {
     Promise.all([
       Axios.get("/api/days"),
@@ -28,21 +30,9 @@ export function useApplicationData(props) {
     }).catch((err) => console.log('error: ', err));
   }, [])
 
-//  appointments: {
-//     "1": { id: 1, time: "12pm", interview: null },
-//     "2": {
-//       id: 2,
-//       time: "1pm",
-//       interview: { student: "Archie Cohen", interviewer: 2 }
-//     },
-//     "3": {
-//       id: 3,
-//       time: "2pm",
-//       interview: { student: "Leopold Silvers", interviewer: 4 }
-//     },
-//     "4": { id: 4, time: "3pm", interview: null }
-//   },
+  //a function for booking an interview & update local & remote state
   function bookInterview(id, interview) {
+    //add new interview object to appointment
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview }
@@ -52,8 +42,7 @@ export function useApplicationData(props) {
       [id]: appointment
     };
     
-    // console.log("state: ", state);
-    
+    //update spots remaining
     const days = state.days.map((day) => {
       if (day.appointments.includes(id)) {
         let counter = 0;
@@ -72,8 +61,7 @@ export function useApplicationData(props) {
 
     )
   
-
-
+    //update remote state
     return Axios
       .put(`/api/appointments/${id}`, { interview })
       .then(() => {
@@ -85,8 +73,9 @@ export function useApplicationData(props) {
       });
   }
   
-
+  // a function to remove an interview & update state
   function cancelInterview(id) {
+    //set interview to null
     const appointment = {
       ...state.appointments[id],
       interview: null
@@ -96,6 +85,8 @@ export function useApplicationData(props) {
       ...state.appointments,
       [id]: appointment
     };
+
+    //update spots remaining
     const days = state.days.map((day) => {
       if (day.appointments.includes(id)) {
         return {
@@ -108,6 +99,7 @@ export function useApplicationData(props) {
 
     )
 
+    //update remote state
     return Axios
       .delete(`/api/appointments/${id}`, { interview: null })
       .then(() => {
