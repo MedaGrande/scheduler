@@ -1,5 +1,5 @@
 # Interview Scheduler
-Interview Scheduler is an app developed by [Lighthouse Labs](https://www.lighthouselabs.ca/ students as part of React learing project.
+Interview Scheduler is an app developed by [Lighthouse Labs](https://www.lighthouselabs.ca/) students as part of React learing project.
 It is an app that allows students to book, edit & delete an appointment with an interviewer.
 It is built in a TDD manner & tests like Storybook, Jest & Cypress were used in its development.
 
